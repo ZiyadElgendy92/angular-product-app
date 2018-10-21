@@ -5,30 +5,38 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css'],
   template: `
-    <ul class='items'><li *ngFor="let item of items"><span class='tag'>{{item.itemindex+1}}- {{item.id}} </span>{{item.name}} 
+    <body>
+	<ul class='items'><li *ngFor="let item of items"><span class='tag'>{{item.itemindex+1}}- {{item.id}} </span>{{item.name}} 
 	
-	<button > edit</button> 
+	<button (click)="edititem(item.name, item.id, item.itemindex )" > edit</button> 
 	
 	<button  (click)="popItem(item.itemindex)"> delll</button> </li></ul>
 	
+	<button id="addbtn" class="button"> Add New Product </button>
+	
 	<div class="addproduct">
-	add product
+	insert product data<span class="closebtn">&times;</span>
 	<div class="field">Name<input #newItemName ></div>
-	<div class="field">Id<input #newItemId ></div>
+	<div class="field">Id<input #newItemId >
+	
+	</div>
 
     <button (click)="addItem(newItemName.value, newItemId.value)">Confirm</button>
 	</div>
 	
 	<div class="editproduct">
 	edit product 
-	<div class="field">Name<input #new2ItemName value="xxxx"></div>
-	<div class="field">Id<input #new2ItemId value="yyyy"></div>
+	<div class="field">Name<input #new2ItemName value={{templist[0].name}}></div>
+	<div class="field">Id<input #new2ItemId value={{templist[0].id}}></div>
 
-    <button (click)="addItem(newItemName.value, newItemId.value)">Confirm edit</button>
+    <button (click)="updateitem(new2ItemName.value, new2ItemId.value, templist[0].itemindex)">Confirm edit</button>
 	</div>
-	
+	</body>
   `
 })
+
+
+
 export class ProductlistComponent implements OnInit {
 
   constructor() { }
@@ -39,7 +47,11 @@ export class ProductlistComponent implements OnInit {
   items: itemlist[] = [
   { id: 1951, name: 'car', itemindex:0 },
   { id: 1652, name: 'motorbike', itemindex:1 }
+  { id: 93451, name: 'buy', itemindex:2 },
+  { id: 51, name: 'far', itemindex:3 }
+  
 ];
+  
   
   addItem(newItemName: string, newItemId: number) {
     /*if (newItemName && newItemId) {} wrap all in here*/
@@ -48,12 +60,23 @@ export class ProductlistComponent implements OnInit {
 	  } deletethis*/
 	  
 	  var indx= this.items.length;
-	  var newItem ={id: newItemId, name:newItemName, itemindex: this.items.length}
+	  var newItem ={id: newItemId, name:newItemName, itemindex: this.items.length};
       this.items.push(newItem);
 	  console.log(newItem); //checking
 	
   }
   
+  edititem(n, d, i){
+  var tempobj= {id: d, name:n, itemindex:i }
+  this.templist.splice(0,1,tempobj);
+  console.log (this.templist);//checking
+  }
+  
+  updateitem(n, d, i){
+	var newItem ={id: d, name:n, itemindex: i};
+	this.items.splice(i, 1, newItem);
+	this.templist.splice(0,1, {id: "", name:"", itemindex:"" });
+  }
   
   
   popItem(n){
@@ -61,9 +84,13 @@ export class ProductlistComponent implements OnInit {
   
   for (var  i=0; i<this.items.length; i++){
 		this.items[i].itemindex = i;
+		
 	  }
   }
+     templist = [{id: "", name:"", itemindex:"" }];//array declaration!
+  
 }
+
 
 
 export class item {
