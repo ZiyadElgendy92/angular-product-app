@@ -46,7 +46,7 @@ export class ProductlistComponent implements OnInit {
   ngOnInit() {
   }
 
-  items/*: itemlist[]*/ = [
+  items/*: itemlist[]  */ = [
   { id: 1951, name: 'car', itemindex:0 },
   { id: 1652, name: 'motorbike', itemindex:1 },
   { id: 93451, name: 'buy', itemindex:2 },
