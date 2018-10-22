@@ -6,13 +6,55 @@ body {
      height: 100vh;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+ 
+}
+
+li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+  margin: auto;
+  width: 70%;
+  padding-bottom:1em
+}
+
+/*#titlebar*/
+
+li:not(#titlebar):hover  {
+  font-size: 22px;
+  background: #f6f6f6;
+}
+
+#titlebar{
+	padding-bottom:1em;
+	font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+.tag{
+	padding-right:5%;
+}
+button{
+	background: 	#708090;
+	padding: 1em 1em;
+	color: white;
+	border: 0;
+	margin: 3px;
+	border-radius: 5px;
+}
+.btns{
+	float: right;
+}
 .button{
 	background: gray;
 	padding: 1em 2em;
 	color: white;
 	border: 0;
-	
+	float: right;
 }
+
 .button:hover{
 	background:#333;
 	cursor: pointer;

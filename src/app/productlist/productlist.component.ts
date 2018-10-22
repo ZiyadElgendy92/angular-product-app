@@ -6,19 +6,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./productlist.component.css'],
   template: `
     <body>
-	<ul class='items'><li *ngFor="let item of items"><span class='tag'>{{item.itemindex+1}}- {{item.id}} </span>{{item.name}} 
 	
-	<button (click)="edititem(item.name, item.id, item.itemindex )" > edit</button> 
+	<ul class='items'>
 	
-	<button  (click)="popItem(item.itemindex)"> delll</button> </li></ul>
+	<li id="titlebar" ><span class='tag'>Index  ID</span> NAME <button id="addbtn" class="button" (click)="openmodal()"> Add New Product </button>
+	</li>
 	
-	<button id="addbtn" class="button" (click)="openmodal()"> Add New Product </button>
+	<li *ngFor="let item of items"><span class='tag'>{{item.itemindex+1}}   </span>{{item.id}}  {{item.name}} 
+	
+	<span class="btns">
+	<button (click)="edititem(item.name, item.id, item.itemindex )" > edit</button>
+	<button  (click)="popItem(item.itemindex)"> del</button>
+	</span> 
+	
+	</li>
+	</ul>
+	
+	
+	
 	
 	<div class="addproduct" id="addproduct">
 	<div class="modalbox">
 	insert product data <span class="closebtn" (click)="closemodal()">&times;</span>
-	<div class="field">Name<input #newItemName ></div>
-	<div class="field">Id<input #newItemId ></div>
+	<div class="field"  >Name<input #newItemName id="inputname"></div>
+	<div class="field"  >Id<input #newItemId id="inputid"></div>
     <button (click)="addItem(newItemName.value, newItemId.value)">Confirm</button>
 	</div>
 	</div>
@@ -47,24 +58,24 @@ export class ProductlistComponent implements OnInit {
   }
 
   items/*: itemlist[]  */ = [
-  { id: 1951, name: 'car', itemindex:0 },
-  { id: 1652, name: 'motorbike', itemindex:1 },
-  { id: 93451, name: 'buy', itemindex:2 },
-  { id: 51, name: 'far', itemindex:3 }
+  { id: 9658, name: 'nissan', itemindex:0 },
+  { id: 2548, name: 'toyota', itemindex:1 },
+  { id: 9847, name: 'bmw', itemindex:2 },
+  { id: 9865, name: 'fiat', itemindex:3 }
   
 ];
   
   
   addItem(newItemName: string, newItemId: number) {
     /*if (newItemName && newItemId) {} wrap all in here*/
-	  /*for (var i=0; i<this.items.length; i++){
-		this.items[i].itemindex = i;
-	  } deletethis*/
+
 	  
 	  var indx= this.items.length;
 	  var newItem ={id: newItemId, name:newItemName, itemindex: this.items.length};
       this.items.push(newItem);
 	  console.log(newItem); //checking
+	  document.getElementById('inputname').value='' ;
+	  document.getElementById('inputid').value='' ;
 	
   }
   
@@ -95,12 +106,14 @@ export class ProductlistComponent implements OnInit {
 
 
 	openalert(){//checking
-		console.log("open!");
+		console.log("opennnn!");
 	}
   openmodal(){
-  var modal = document.getElementById('addproduct');
+	var modal = document.getElementById('addproduct');
 	modal.style.display = 'block';
 	this.openalert();//checking
+	document.getElementById('inputname').value='' ;
+	document.getElementById('inputid').value='' ;
   }
   
   closemodal(){
