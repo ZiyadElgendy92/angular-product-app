@@ -119,7 +119,7 @@ openmodal2(){
   
   
 }
-//end script methods
+
 
 
 export class item {
