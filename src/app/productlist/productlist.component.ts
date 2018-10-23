@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css'],
+  
   template: `
-    <body>
+    
 	
 	<ul class='items'>
 	
@@ -44,7 +45,7 @@ import { Component, OnInit } from '@angular/core';
 	</div>
 	</div>
 	
-	</body>
+	
   `
 })
 
@@ -74,8 +75,8 @@ export class ProductlistComponent implements OnInit {
 	  var newItem ={id: newItemId, name:newItemName, itemindex: this.items.length};
       this.items.push(newItem);
 	  console.log(newItem); //checking
-	  document.getElementById('inputname').value='' ;
-	  document.getElementById('inputid').value='' ;
+	  (<HTMLInputElement>document.getElementById('inputname')).value='' ;
+	  (<HTMLInputElement>document.getElementById('inputid')).value='' ;
 	
   }
   
@@ -112,10 +113,10 @@ export class ProductlistComponent implements OnInit {
 	var modal = document.getElementById('addproduct');
 	modal.style.display = 'block';
 	this.openalert();//checking
-	document.getElementById('inputname').value='' ;
-	document.getElementById('inputid').value='' ;
+	(<HTMLInputElement>document.getElementById('inputname')).value='' ;
+	(<HTMLInputElement>document.getElementById('inputid')).value='' ;
   }
-  
+  //compiling error fixed 
   closemodal(){
   var modal = document.getElementById('addproduct');
   modal.style.display = 'none';
