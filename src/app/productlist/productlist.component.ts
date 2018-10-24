@@ -7,14 +7,13 @@ import { Component, OnInit } from '@angular/core';
   
   template: `
     
-	
 	<ul class='items'>
 	
-	<li id="titlebar" ><span class='tag'>Index  ID</span> NAME <button id="addbtn" class="button" (click)="openmodal()"> Add New Product </button>
+	<li id="titlebar" ><span class='tag'>Index  </span>ID -    NAME <button id="addbtn" class="button" (click)="openmodal()"> Add New Product </button>
 	</li>
 	
-	<li *ngFor="let item of items"><span class='tag'>{{item.itemindex+1}}   </span>{{item.id}}  {{item.name}} 
-	
+	<li *ngFor="let item of items"><span class="line" > <span class='tag'>{{item.itemindex+1}}   </span>{{item.id}}  -   {{item.name}} 
+	</span>
 	<span class="btns">
 	<button (click)="edititem(item.name, item.id, item.itemindex )" > edit</button>
 	<button  (click)="popItem(item.itemindex)"> del</button>
@@ -29,7 +28,7 @@ import { Component, OnInit } from '@angular/core';
 	<div class="addproduct" id="addproduct">
 	<div class="modalbox">
 	insert product data <span class="closebtn" (click)="closemodal()">&times;</span>
-	<div class="field"  >Name<input #newItemName id="inputname"></div>
+	<div class="field">Name<input #newItemName id="inputname"></div>
 	<div class="field"  >Id<input #newItemId id="inputid"></div>
     <button (click)="addItem(newItemName.value, newItemId.value)">Confirm</button>
 	</div>
@@ -68,7 +67,7 @@ export class ProductlistComponent implements OnInit {
   
   
   addItem(newItemName: string, newItemId: number) {
-    /*if (newItemName && newItemId) {} wrap all in here*/
+    if (newItemName && newItemId) { 
 
 	  
 	  var indx= this.items.length;
@@ -77,7 +76,8 @@ export class ProductlistComponent implements OnInit {
 	  console.log(newItem); //checking
 	  (<HTMLInputElement>document.getElementById('inputname')).value='' ;
 	  (<HTMLInputElement>document.getElementById('inputid')).value='' ;
-	
+	  this.closemodal();
+	  }
   }
   
   edititem(n, d, i){
